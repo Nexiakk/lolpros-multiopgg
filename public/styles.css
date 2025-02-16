@@ -1,0 +1,86 @@
+/* public/styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f8f9fa;
+}
+
+#multiSearchLink {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #28a745;  /* Green background */
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#multiSearchLink:hover {
+    background-color: #218838;   /* Darker green on hover */
+}
+
+/* public/styles.css */
+#resetButton {
+    background-color: #6c757d;   /* Gray background */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#resetButton:hover {
+    background-color: #5a6268;   /* Darker gray on hover */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1, h2 {
+    color: #343a40;
+}
+
+form, #outputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="url"] {
+    padding: 10px;
+    width: 300px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+a {
+    word-break: break-all;
+    color: #007bff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#loading {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #007bff;
+}

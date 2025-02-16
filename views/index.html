@@ -1,0 +1,103 @@
+<!-- views/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOLProsToOPGG</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>LOLPros Multi to OPGG Link Generator</h1>
+        <form id="linkForm">
+            <input type="url" id="linkInput" name="url" placeholder="Enter the URL" required>
+            <button type="submit">Submit</button>
+        </form>
+        <!-- Loading indicator, hidden by default -->
+        <div id="loading" class="hidden">Processing...</div>
+        <!-- Output container, hidden until processing is done -->
+        <div id="outputContainer" class="hidden">
+            <h2>Your MultiGG Link</h2>
+            <a id="multiSearchLink" href="#" target="_blank">Open MultiGG Link</a>
+            <button id="resetButton">Generate Another Link</button>
+        </div>
+    </div>
+
+    <script>
+    // script.js
+
+    // DOM elements
+    const linkForm = document.getElementById('linkForm');
+    const linkInput = document.getElementById('linkInput');
+    const outputContainer = document.getElementById('outputContainer');
+    const multiSearchLink = document.getElementById('multiSearchLink');
+    const resetButton = document.getElementById('resetButton');
+    const loadingIndicator = document.getElementById('loading');
+    const submitButton = linkForm.querySelector('button[type="submit"]');
+
+    // Ensure 'outputContainer' and 'loadingIndicator' are hidden when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        outputContainer.classList.add('hidden');
+        loadingIndicator.classList.add('hidden');
+    });
+
+    linkForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const url = linkInput.value.trim();
+
+        if (url) {
+            // Disable the submit button to prevent multiple submissions
+            submitButton.disabled = true;
+            // Show the "Processing..." message
+            loadingIndicator.classList.remove('hidden');
+
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url }),
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Update the link with the generated URL
+                    multiSearchLink.href = data.multiSearchUrl;
+                    multiSearchLink.textContent = 'Open MultiGG Link';
+
+                    // Hide the "Processing..." message
+                    loadingIndicator.classList.add('hidden');
+                    // Show the output container and hide the form
+                    outputContainer.classList.remove('hidden');
+                    linkForm.classList.add('hidden');
+                } else {
+                    alert(`Error: ${data.error}`);
+                    // Hide the "Processing..." message
+                    loadingIndicator.classList.add('hidden');
+                }
+            } catch (error) {
+                alert('An error occurred while processing the link.');
+                console.error(error);
+                // Hide the "Processing..." message
+                loadingIndicator.classList.add('hidden');
+            } finally {
+                // Re-enable the submit button
+                submitButton.disabled = false;
+            }
+        } else {
+            alert('Please enter a URL.');
+        }
+    });
+
+    resetButton.addEventListener('click', () => {
+        // Clear the input field
+        linkInput.value = '';
+        // Hide the output container
+        outputContainer.classList.add('hidden');
+        // Show the form
+        linkForm.classList.remove('hidden');
+    });
+    </script>
+</body>
+</html>
