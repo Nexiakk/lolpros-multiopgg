@@ -149,3 +149,22 @@ pre {
 * {
     box-sizing: border-box;
 }
+
+/* Adjust spacing */
+form, #outputContainer {
+    width: 100%;
+    max-width: 400px;
+}
+
+form {
+    margin-top: 30px;
+}
+
+#outputContainer {
+    margin-top: 40px;
+}
+
+#multiSearchLink, #resetButton {
+    width: 100%;
+    text-align: center;
+}
