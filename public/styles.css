@@ -1,86 +1,151 @@
-/* public/styles.css */
+/* styles.css */
 
+/* Base Styles */
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    background-color: #333333;
-}
-
-#multiSearchLink {
-    display: inline-block;
-    text-decoration: none;
-    color: #fff;
-    background-color: #28a745;  /* Green background */
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-#multiSearchLink:hover {
-    background-color: #218838;   /* Darker green on hover */
-}
-
-/* public/styles.css */
-#resetButton {
-    background-color: #6c757d;   /* Gray background */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#resetButton:hover {
-    background-color: #5a6268;   /* Darker gray on hover */
+    font-family: 'Inter', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0;            /* Light text color */
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
+    text-align: center;
 }
 
+/* Headings */
 h1, h2 {
-    color: #343a40;
+    color: #ffffff; /* White text for headings */
 }
 
-form, #outputContainer {
+/* Forms */
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
 input[type="url"] {
     padding: 10px;
     width: 300px;
-    margin-bottom: 15px;
+    background-color: #1e1e1e; /* Dark input background */
+    border: 1px solid #424242; /* Dark border */
+    border-radius: 5px;
     font-size: 16px;
+    color: #ffffff;            /* Light text */
+    outline: none;
 }
 
+input[type="url"]::placeholder {
+    color: #bdbdbd; /* Lighter placeholder text */
+}
+
+input[type="url"]:focus {
+    border-color: #1e88e5; /* Blue border on focus */
+}
+
+/* Buttons */
 button {
+    margin-top: 15px;
     padding: 10px 20px;
+    background-color: #1e88e5; /* Blue button background */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.hidden {
-    display: none;
+button:hover {
+    background-color: #1565c0; /* Darker blue on hover */
 }
 
+/* Add transitions to interactive elements */
+button, input[type="url"], #multiSearchLink, #resetButton {
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+input[type="url"]:focus, button:focus, #multiSearchLink:focus, #resetButton:focus {
+    outline: 2px solid #1e88e5;
+    outline-offset: 2px;
+}
+
+/* Output Container */
+#outputContainer {
+    margin-top: 30px;
+}
+
+/* Links */
 a {
-    word-break: break-all;
-    color: #007bff;
+    color: #42a5f5;           /* Light blue links */
+    text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
+#multiSearchLink {
+    display: inline-block;
+    background-color: #1e88e5;
+    padding: 10px 20px;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+#multiSearchLink:hover {
+    background-color: #1565c0;
+}
+
+/* Reset Button */
+#resetButton {
+    background-color: #757575; /* Gray button */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#resetButton:hover {
+    background-color: #616161;
+}
+
+/* Loading Indicator */
+#loading {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #42a5f5;
+}
+
+/* Preformatted Text */
+pre {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 5px;
+    color: #e0e0e0;
+    border: 1px solid #424242;
+    max-width: 600px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Hidden Class */
 .hidden {
     display: none !important;
 }
 
-#loading {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #007bff;
+/* Additional Styles */
+* {
+    box-sizing: border-box;
 }
