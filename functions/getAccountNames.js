@@ -1,5 +1,4 @@
-import puppeteer from "puppeteer-core"; // Update the import
-import Chromium from "chrome-aws-lambda";
+import puppeteer from "puppeteer"; // Update the import
 
 export default async function constructMultiGG(url) {
   const accountNames = await getAccountNames(url);
@@ -34,25 +33,13 @@ async function getAccountNames(url) {
   }
 
   // Launch a headless browser
-  browser = await Chromium.puppeteer.launch({
-    args: Chromium.args,
-    defaultViewport: Chromium.defaultViewport,
-    executablePath: await Chromium.executablePath,
-    headless: Chromium.headless,
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"], // Necessary flags
   });
   const page = await browser.newPage();
 
   try {
-    // Block images, fonts etc. for most lightweight operations
-    await page.setRequestInterception(true);
-    page.on("request", (req) => {
-      const blocked = ["image", "stylesheet", "font"];
-      if (blocked.includes(req.resourceType())) {
-        req.abort();
-      } else {
-        req.continue();
-      }
-    });
     // Navigate to the URL and wait for the content to load
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
