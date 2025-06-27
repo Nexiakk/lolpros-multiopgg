@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer"; // Update the import
+import puppeteer from "puppeteer-core"; // Update the import
 
 export default async function constructMultiGG(url) {
   const accountNames = await getAccountNames(url);
@@ -33,11 +33,12 @@ async function getAccountNames(url) {
   }
 
   // Launch a headless browser
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"], // Necessary flags
+  const API_KEY = "2SZrooI5RhwJzkDc61bf60cbe0a435267304b0a5777d875d3";
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: `wss://chrome.browserless.io?token=${API_KEY}&stealth&proxy=residential&headless=false`,
   });
   const page = await browser.newPage();
+  await page.setViewport({ width: 1920, height: 1080 });
 
   try {
     // Navigate to the URL and wait for the content to load
